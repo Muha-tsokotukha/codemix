@@ -9,6 +9,7 @@ const config: Config = {
         secondary: '#8b8594',
         tertiary: '#7f7889',
         brand: '#9969FF',
+        'brand-gray': '#F2F1F4',
       },
       fontSize: {
         sm: '14px',
