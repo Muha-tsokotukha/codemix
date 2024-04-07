@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 export function LogoutCard() {
-  const t = useTranslations('Auth');
+  const t = useTranslations('HomePage');
 
   return (
     <div className="grid content-center">

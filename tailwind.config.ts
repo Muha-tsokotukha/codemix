@@ -7,10 +7,14 @@ const config: Config = {
       colors: {
         primary: '#180A29',
         secondary: '#8b8594',
+        tertiary: '#7f7889',
+        brand: '#9969FF',
       },
       fontSize: {
-        lg: '18px',
+        sm: '14px',
         md: '16px',
+        lg: '18px',
+        xl: '24px',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

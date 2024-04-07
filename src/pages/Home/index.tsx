@@ -3,5 +3,5 @@
 export function HomePage() {
   // const t = useTranslations('HomePage');
 
-  return <main> </main>;
+  return <section> </section>;
 }
