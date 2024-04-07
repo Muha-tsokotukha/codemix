@@ -1,6 +1,9 @@
 {
   "HomePage": {
     "messages": "Messages",
-    "logout": "Logout"
+    "logout": "Logout",
+    "promtPlaceholder": "Write a message...",
+    "online": "Online",
+    "offline": "Offline"
   }
 }

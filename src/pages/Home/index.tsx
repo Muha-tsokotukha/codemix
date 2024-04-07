@@ -1,7 +1,9 @@
-// import { useTranslations } from 'next-intl';
+import { ChatMessenger } from '@/src/widgets';
 
 export function HomePage() {
-  // const t = useTranslations('HomePage');
-
-  return <section> chat</section>;
+  return (
+    <section className="flex-1">
+      <ChatMessenger />
+    </section>
+  );
 }
