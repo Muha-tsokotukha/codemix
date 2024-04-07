@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang={locale}>
       <body>
         <Header />
-        <main>
+        <main className="md:flex">
           <ChatList />
           {children}
         </main>
