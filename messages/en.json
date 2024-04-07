@@ -1,9 +1,6 @@
 {
   "HomePage": {
-    "title": "Hello world!"
-  },
-
-  "Auth": {
+    "messages": "Messages",
     "logout": "Logout"
   }
 }

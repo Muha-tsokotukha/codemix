@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Header } from '@/src/widgets';
+import { ChatList, Header } from '@/src/widgets';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -18,7 +18,10 @@ export default function RootLayout({
     <html lang={locale}>
       <body>
         <Header />
-        {children}
+        <main>
+          <ChatList />
+          {children}
+        </main>
       </body>
     </html>
   );
