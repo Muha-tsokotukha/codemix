@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang={locale}>
       <body>
         <Header />
-        <main className="md:flex">{children}</main>
+        <main className="flex">{children}</main>
       </body>
     </html>
   );
