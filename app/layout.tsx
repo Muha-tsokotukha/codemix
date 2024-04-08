@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ChatList, Header } from '@/src/widgets';
+import { Header } from '@/src/widgets';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -18,10 +18,7 @@ export default function RootLayout({
     <html lang={locale}>
       <body>
         <Header />
-        <main className="md:flex">
-          <ChatList />
-          {children}
-        </main>
+        <main className="md:flex">{children}</main>
       </body>
     </html>
   );
