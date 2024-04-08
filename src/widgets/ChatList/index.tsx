@@ -19,10 +19,10 @@ export function ChatList({ title }: Props) {
         <p className="text-primary font-semibold text-xl">{title}(3)</p>
       </section>
 
-      <section className="h-[calc(100vh-184px)] border-r border-gray overflow-y-auto">
-        <ChatLink />
-        <ChatLink isNewMessage />
-        <ChatLink />
+      <section className="h-[calc(100dvh-184px)] border-r border-gray overflow-y-auto">
+        <ChatLink chatId="1" />
+        <ChatLink chatId="2" isNewMessage />
+        <ChatLink chatId="3" />
       </section>
     </aside>
   );
