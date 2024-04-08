@@ -17,7 +17,7 @@ export function ChatMessenger({ status, promtPlaceholder }: Props) {
     <section className={`${isOpen && 'hidden'} md:block`}>
       <MessageHeader name="Aslan" status={status} />
 
-      <section className="p-10 bg-brand-gray overflow-auto grid content-start gap-6 h-[calc(100vh-248px)]">
+      <section className="p-10 bg-brand-gray overflow-auto grid content-start gap-6 h-[calc(100dvh-248px)]">
         <MessageCard message="heeeey" isSentByUser />
         <MessageCard message="hello, send dudes" />
         <MessageCard message="u mean nudes?" isSentByUser />
