@@ -1,10 +1,21 @@
+'use client';
+
+import { useSearchParams } from 'next/navigation';
 import { MessageCard, MessageHeader } from '@/src/entities';
 import { SendInputMessageBar } from '@/src/features';
 
-export function ChatMessenger() {
+type Props = {
+  status: string;
+  promtPlaceholder: string;
+};
+
+export function ChatMessenger({ status, promtPlaceholder }: Props) {
+  const searchParams = useSearchParams();
+  const isOpen = searchParams?.get('isOpen') === 'true';
+
   return (
-    <section>
-      <MessageHeader name="Aslan" isOnline />
+    <section className={`${isOpen && 'hidden'} md:block`}>
+      <MessageHeader name="Aslan" status={status} />
 
       <section className="p-10 bg-brand-gray overflow-auto grid content-start gap-6 h-[calc(100vh-248px)]">
         <MessageCard message="heeeey" isSentByUser />
@@ -20,7 +31,7 @@ export function ChatMessenger() {
         />
       </section>
 
-      <SendInputMessageBar />
+      <SendInputMessageBar promtPlaceholder={promtPlaceholder} />
     </section>
   );
 }
