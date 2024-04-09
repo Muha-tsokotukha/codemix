@@ -2,8 +2,12 @@
   "HomePage": {
     "messages": "Messages",
     "logout": "Logout",
+    "login": "Login",
+    "register": "Sign up",
     "promtPlaceholder": "Write a message...",
     "online": "Online",
-    "offline": "Offline"
+    "offline": "Offline",
+    "email": "Email",
+    "password": "Password"
   }
 }

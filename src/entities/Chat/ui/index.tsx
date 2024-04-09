@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 type Props = {
   isNewMessage?: boolean;
@@ -7,10 +6,8 @@ type Props = {
 };
 
 export function ChatLink({ isNewMessage, chatId }: Props) {
-  const pathname = usePathname();
-
   return (
-    <Link href={`/${pathname?.split('/')?.at(1)}/${chatId}`}>
+    <Link href={`/${chatId}`}>
       <section className="flex justify-between py-5 pl-6 sm:pl-10  pr-8 h-[92px] border-b border-gray">
         <section>
           <p className="text-primary font-medium text-lg">Aslan</p>
