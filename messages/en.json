@@ -8,6 +8,9 @@
     "online": "Online",
     "offline": "Offline",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "repeatPassword": "Repeat password",
+    "repeatPasswordError": "Passwords don't match",
+    "name": "Nickname"
   }
 }
