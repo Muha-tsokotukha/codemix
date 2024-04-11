@@ -1,10 +1,8 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { FastButton, FastInput, setToken } from '@/src/shared';
-import { signUp } from '@/src/features';
+import { FastButton, FastInput } from '@/src/shared';
+import { useRegistrationFormStore } from './model';
 
 type Props = {
   translationKeys: {
@@ -20,6 +18,13 @@ type Props = {
 
 export function RegistrationForm({ translationKeys }: Props) {
   const {
+    handleInputChange,
+    handleSubmit,
+    errors,
+    signUpData,
+    isPasswordMatch,
+  } = useRegistrationFormStore();
+  const {
     emailKey,
     nameKey,
     passwordKey,
@@ -28,42 +33,6 @@ export function RegistrationForm({ translationKeys }: Props) {
     buttonKey,
     repeatPasswordError,
   } = translationKeys;
-  const router = useRouter();
-
-  const defaultValues = {
-    name: '',
-    password: '',
-    email: '',
-  };
-  const [errors, setErrors] = useState(defaultValues);
-  const [signUpData, setSignUpData] = useState({
-    ...defaultValues,
-    repeatPassword: '',
-  });
-  const isPasswordMatch = signUpData.password === signUpData.repeatPassword;
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-
-    setSignUpData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async () => {
-    const { repeatPassword, ...data } = signUpData;
-    if (!isPasswordMatch) return;
-
-    const res = await signUp(data);
-
-    if (res.errors) {
-      setErrors(res.errors);
-    } else if (res.token) {
-      setToken(res.token);
-      router.push('/');
-    }
-  };
 
   return (
     <form
