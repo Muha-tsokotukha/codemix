@@ -8,7 +8,17 @@ export function RegistrationPage() {
     <section className="w-full flex flex-col content-center items-center justify-center p-6">
       <h1 className="text-3xl font-bold text-center mb-4">{t('register')}</h1>
 
-      <RegistrationForm />
+      <RegistrationForm
+        translationKeys={{
+          emailKey: t('email'),
+          nameKey: t('name'),
+          passwordKey: t('password'),
+          repeatPasswordKey: t('repeatPassword'),
+          loginKey: t('login'),
+          buttonKey: t('register'),
+          repeatPasswordError: t('repeatPasswordError'),
+        }}
+      />
     </section>
   );
 }
