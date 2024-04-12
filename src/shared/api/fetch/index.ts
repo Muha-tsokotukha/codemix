@@ -1,5 +1,5 @@
-export function fetcher(url: string, config: RequestInit) {
-  const { headers, ...rest } = config;
+export function fetcher(url: string, config?: RequestInit) {
+  const { headers, ...rest } = config || {};
 
   return fetch(`http://localhost:5000${url}`, {
     headers: {
