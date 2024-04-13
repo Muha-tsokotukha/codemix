@@ -2,6 +2,7 @@
 
 import { redirect, useSearchParams } from 'next/navigation';
 import { ChatLink } from '@/src/entities';
+import { useAuth } from '@/src/shared';
 
 type Props = {
   title: string;
@@ -9,9 +10,15 @@ type Props = {
 
 export function ChatList({ title }: Props) {
   const searchParams = useSearchParams();
+
   const isOpen = searchParams?.get('isOpen') === 'true';
 
-  if (!localStorage.getItem('token')) redirect('/login');
+  const { user, logout } = useAuth() || {};
+
+  if ((!user || localStorage.getItem('token')) && logout) {
+    logout();
+    redirect('/login');
+  }
 
   return (
     <aside

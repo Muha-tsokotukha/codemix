@@ -1,3 +1,5 @@
+import { User } from '@/src/entities';
+
 export type SignUpUserRequest = {
   name: string;
   password: string;
@@ -5,7 +7,7 @@ export type SignUpUserRequest = {
 };
 
 export type SignUpUserResponse = {
-  email?: string;
+  user?: User;
   token?: string;
   errors?: SignUpUserRequest;
 };
