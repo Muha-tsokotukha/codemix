@@ -2,15 +2,21 @@
 
 import { useEffect } from 'react';
 import { useSearchParams, redirect } from 'next/navigation';
-import { ChatLink } from '@/src/entities';
+import useSWR from 'swr';
+import { useAuth } from '@/src/shared';
+import { ChatLink, getChatList } from '@/src/entities';
 
 type Props = {
   title: string;
 };
 
 export function ChatList({ title }: Props) {
+  const { user } = useAuth() || {};
   const searchParams = useSearchParams();
   const isOpen = searchParams?.get('isOpen') === 'true';
+  const { data } = useSWR(user?.id ? 'chatList' : null, () =>
+    getChatList(`${user?.id}`)
+  );
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -27,9 +33,24 @@ export function ChatList({ title }: Props) {
       </section>
 
       <section className="h-[calc(100dvh-184px)] border-r border-gray overflow-y-auto">
-        <ChatLink chatId="1" />
-        <ChatLink chatId="2" isNewMessage />
-        <ChatLink chatId="3" />
+        {data?.map(
+          ({ id, lastMessage: { text, timestamp }, title: chatTitle }) => {
+            const date = new Date(timestamp);
+            const hours = date.getUTCHours().toString().padStart(2, '0');
+            const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+            const formattedTime = `${hours}:${minutes}`;
+
+            return (
+              <ChatLink
+                key={id}
+                chatId={id}
+                title={text}
+                name={chatTitle}
+                timestamp={formattedTime}
+              />
+            );
+          }
+        )}
       </section>
     </aside>
   );

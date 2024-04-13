@@ -3,15 +3,24 @@ import Link from 'next/link';
 type Props = {
   isNewMessage?: boolean;
   chatId: string;
+  title?: string;
+  timestamp?: string;
+  name?: string;
 };
 
-export function ChatLink({ isNewMessage, chatId }: Props) {
+export function ChatLink({
+  isNewMessage,
+  chatId,
+  title,
+  timestamp,
+  name,
+}: Props) {
   return (
     <Link href={`/${chatId}`}>
       <section className="flex justify-between py-5 pl-6 sm:pl-10  pr-8 h-[92px] border-b border-gray">
         <section>
-          <p className="text-primary font-medium text-lg">Aslan</p>
-          <p className="text-end text-md text-secondary">Send nuds</p>
+          <p className="text-primary font-medium text-lg">{name}</p>
+          <p className="text-md text-secondary">{title?.slice(0, 30)}</p>
         </section>
 
         <section className="flex flex-col justify-between items-center">
@@ -23,7 +32,7 @@ export function ChatLink({ isNewMessage, chatId }: Props) {
             <p> </p>
           )}
 
-          <p className="text-sm text-tertiary">10:21</p>
+          <p className="text-sm text-tertiary">{timestamp}</p>
         </section>
       </section>
     </Link>
