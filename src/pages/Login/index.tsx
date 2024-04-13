@@ -8,7 +8,14 @@ export function LoginPage() {
     <section className="w-full flex flex-col content-center items-center justify-center p-6">
       <h1 className="text-3xl font-bold text-center mb-4">{t('login')}</h1>
 
-      <LoginForm />
+      <LoginForm
+        translationKeys={{
+          emailKey: t('email'),
+          passwordKey: t('password'),
+          signUpKey: t('register'),
+          buttonKey: t('login'),
+        }}
+      />
     </section>
   );
 }
