@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Header } from '@/src/widgets';
-import { AuthProvider } from '@/src/app/providers';
+import { AuthProvider, ChatHistoryProvider } from '@/src/app/providers';
 
 export const metadata: Metadata = {
   title: 'Cloudmix',
@@ -19,7 +19,9 @@ export default function LocaleRootLayout({
       <body>
         <AuthProvider>
           <Header />
-          <main className="flex">{children}</main>
+          <ChatHistoryProvider>
+            <main className="flex">{children}</main>
+          </ChatHistoryProvider>
         </AuthProvider>
       </body>
     </html>
