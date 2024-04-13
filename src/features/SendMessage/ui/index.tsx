@@ -1,7 +1,8 @@
 'use client';
 
 import { useContext, useState } from 'react';
-import { ChatHistoryContext, SendIcon } from '@/src/shared';
+import { useRouter } from 'next/navigation';
+import { AuthContext, ChatHistoryContext, SendIcon } from '@/src/shared';
 import { sendMessageToBot } from '../model/api';
 
 type Props = {
@@ -10,21 +11,33 @@ type Props = {
 
 export function SendInputMessageBar({ promtPlaceholder }: Props) {
   const [message, setMessage] = useState('');
+  const { push } = useRouter();
   const { registerMessage } = useContext(ChatHistoryContext) || {};
+  const { user } = useContext(AuthContext) || {};
 
   const handleSubmit = async () => {
-    if (registerMessage) {
+    if (registerMessage && user) {
       registerMessage({ message, isSentByUser: true });
       setMessage('');
 
       try {
-        const resMessage = await sendMessageToBot(message);
-        registerMessage({ message: resMessage, isSentByUser: false });
+        const res = await sendMessageToBot({
+          message,
+          userId: user?.id,
+        });
+
+        registerMessage({
+          message: res.message,
+          isSentByUser: false,
+        });
+
+        push(`/${res.chatId}`);
       } catch (err) {
         registerMessage({
           message: 'Sorry, error occured trying to respond to you :(',
           isSentByUser: false,
         });
+        throw err;
       }
     }
   };
