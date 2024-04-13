@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, ReactNode, useMemo } from 'react';
+import React, { useState, ReactNode, useMemo, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 import { ChatHistoryContext } from '@/src/shared';
@@ -29,16 +29,20 @@ export function ChatHistoryProvider({ children }: { children: ReactNode }) {
     setMessages((prev) => [...prev, { message, isSentByUser }]);
   };
 
-  const contextValue = useMemo(() => {
-    const history = data
-      ? data?.map((item) => ({
-          message: item?.text,
-          isSentByUser: item?.senderId !== 'AI',
-        }))
-      : messages;
+  useEffect(() => {
+    if (data) {
+      const newMessages = data.map((item) => ({
+        message: item?.text,
+        isSentByUser: item?.senderId !== 'AI',
+      }));
+      setMessages(newMessages);
+    }
+  }, [data]);
 
-    return { history, registerMessage };
-  }, [messages, data]);
+  const contextValue = useMemo(
+    () => ({ history: messages, registerMessage }),
+    [messages]
+  );
 
   return (
     <ChatHistoryContext.Provider value={contextValue}>

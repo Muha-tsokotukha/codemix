@@ -33,21 +33,24 @@ export function ChatList({ title }: Props) {
       </section>
 
       <section className="h-[calc(100dvh-184px)] border-r border-gray overflow-y-auto">
-        {data?.map(({ id, lastMessage: { text, timestamp } }) => {
-          const date = new Date(timestamp);
-          const hours = date.getUTCHours().toString().padStart(2, '0');
-          const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-          const formattedTime = `${hours}:${minutes}`;
+        {data?.map(
+          ({ id, lastMessage: { text, timestamp }, title: chatTitle }) => {
+            const date = new Date(timestamp);
+            const hours = date.getUTCHours().toString().padStart(2, '0');
+            const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+            const formattedTime = `${hours}:${minutes}`;
 
-          return (
-            <ChatLink
-              key={id}
-              chatId={id}
-              title={text}
-              timestamp={formattedTime}
-            />
-          );
-        })}
+            return (
+              <ChatLink
+                key={id}
+                chatId={id}
+                title={text}
+                name={chatTitle}
+                timestamp={formattedTime}
+              />
+            );
+          }
+        )}
       </section>
     </aside>
   );

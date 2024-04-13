@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { AuthContext, ChatHistoryContext, SendIcon } from '@/src/shared';
 import { sendMessageToBot } from '../model/api';
 
@@ -12,6 +12,8 @@ type Props = {
 export function SendInputMessageBar({ promtPlaceholder }: Props) {
   const [message, setMessage] = useState('');
   const { push } = useRouter();
+  const params = useParams();
+  const chatId = params?.chatId?.[0];
   const { registerMessage } = useContext(ChatHistoryContext) || {};
   const { user } = useContext(AuthContext) || {};
 
@@ -24,6 +26,7 @@ export function SendInputMessageBar({ promtPlaceholder }: Props) {
         const res = await sendMessageToBot({
           message,
           userId: user?.id,
+          chatId,
         });
 
         registerMessage({
