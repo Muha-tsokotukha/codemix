@@ -1,6 +1,7 @@
 'use client';
 
-import { redirect, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import { useSearchParams, redirect } from 'next/navigation';
 import { ChatLink } from '@/src/entities';
 
 type Props = {
@@ -11,7 +12,11 @@ export function ChatList({ title }: Props) {
   const searchParams = useSearchParams();
   const isOpen = searchParams?.get('isOpen') === 'true';
 
-  if (!localStorage.getItem('token')) redirect('/login');
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      redirect('/login');
+    }
+  });
 
   return (
     <aside

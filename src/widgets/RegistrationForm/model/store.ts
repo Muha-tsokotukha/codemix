@@ -1,10 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { setToken } from '@/src/shared';
+import { setToken, useAuth } from '@/src/shared';
 import { signUp } from '@/src/features';
 
 export function useRegistrationFormStore() {
   const router = useRouter();
+  const { login: loginUser } = useAuth() || {};
 
   const defaultValues = {
     name: '',
@@ -33,10 +34,13 @@ export function useRegistrationFormStore() {
 
     const res = await signUp(data);
 
-    if (res.errors) {
-      setErrors(res.errors);
-    } else if (res.token) {
-      setToken(res.token);
+    const { errors: responseErrors, user, token } = res;
+
+    if (responseErrors) {
+      setErrors(responseErrors);
+    } else if (token && user && loginUser) {
+      setToken(token, user);
+      loginUser(user);
       router.push('/');
     }
   };

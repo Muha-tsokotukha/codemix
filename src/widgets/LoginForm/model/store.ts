@@ -1,10 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { setToken } from '@/src/shared';
+import { setToken, useAuth } from '@/src/shared';
 import { login } from '@/src/features';
 
 export function useLoginFormStore() {
   const router = useRouter();
+  const { login: loginUser } = useAuth() || {};
 
   const defaultValues = {
     password: '',
@@ -25,10 +26,13 @@ export function useLoginFormStore() {
   const handleSubmit = async () => {
     const res = await login(loginData);
 
-    if (res.message) {
-      setError(res.message);
-    } else if (res.token) {
-      setToken(res.token);
+    const { message, user, token } = res;
+
+    if (message) {
+      setError(message);
+    } else if (token && user && loginUser) {
+      loginUser(user);
+      setToken(token, user);
       router.push('/');
     }
   };
