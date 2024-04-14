@@ -18,16 +18,20 @@ export function ChatMessenger({ status, promtPlaceholder }: Props) {
 
   return (
     <section className={`${isOpen && 'hidden'} md:block`}>
-      <MessageHeader name="Aslan" status={status} />
+      <MessageHeader name="Bot" status={status} />
 
       <section className="p-10 bg-brand-gray overflow-auto grid content-start gap-6 h-[calc(100dvh-248px)]">
-        {history?.map(({ message, isSentByUser }) => (
-          <MessageCard
-            key={message}
-            message={message}
-            isSentByUser={isSentByUser}
-          />
-        ))}
+        {history?.map(({ message, isSentByUser }, index) => {
+          const key = `${message}-${index}`;
+
+          return (
+            <MessageCard
+              key={key}
+              message={message}
+              isSentByUser={isSentByUser}
+            />
+          );
+        })}
       </section>
 
       <SendInputMessageBar promtPlaceholder={promtPlaceholder} />

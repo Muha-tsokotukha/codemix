@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 import { useSearchParams, redirect } from 'next/navigation';
 import useSWR from 'swr';
 import { useAuth } from '@/src/shared';
@@ -33,6 +34,11 @@ export function ChatList({ title }: Props) {
       </section>
 
       <section className="h-[calc(100dvh-184px)] border-r border-gray overflow-y-auto">
+        <Link href="/">
+          <section className="text-brand flex justify-between py-5 pl-6 sm:pl-10 pr-8 border-b border-gray text-xl">
+            New Chat +
+          </section>
+        </Link>
         {data?.map(
           ({ id, lastMessage: { text, timestamp }, title: chatTitle }) => {
             const date = new Date(timestamp);

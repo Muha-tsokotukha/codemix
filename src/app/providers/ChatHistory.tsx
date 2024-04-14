@@ -19,25 +19,22 @@ export function ChatHistoryProvider({ children }: { children: ReactNode }) {
     getChatMessages(`${chatId}`)
   );
 
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      message: 'Hello! How can I help you today?',
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const registerMessage = ({ message, isSentByUser }: Message) => {
     setMessages((prev) => [...prev, { message, isSentByUser }]);
   };
 
   useEffect(() => {
-    if (data) {
+    if (!chatId) setMessages([]);
+    else if (data) {
       const newMessages = data.map((item) => ({
         message: item?.text,
         isSentByUser: item?.senderId !== 'AI',
       }));
       setMessages(newMessages);
     }
-  }, [data]);
+  }, [data, chatId]);
 
   const contextValue = useMemo(
     () => ({ history: messages, registerMessage }),
