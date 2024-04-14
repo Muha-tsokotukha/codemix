@@ -30,7 +30,9 @@ export function ChatList({ title }: Props) {
       className={`${isOpen ? 'w-full' : 'w-0'} md:w-[375px] xl:w-[512px] overflow-hidden`}
     >
       <section className="border-r border-gray flex items-center py-5 pl-6 sm:pl-10  pr-8 sm:h-[92px] border-b border-gray">
-        <p className="text-primary font-semibold text-xl">{title}(3)</p>
+        <p className="text-primary font-semibold text-xl">
+          {title}({data?.length})
+        </p>
       </section>
 
       <section className="h-[calc(100dvh-184px)] border-r border-gray overflow-y-auto">
