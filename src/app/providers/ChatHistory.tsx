@@ -28,7 +28,7 @@ export function ChatHistoryProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!chatId) setMessages([]);
     else if (data) {
-      const newMessages = data.map((item) => ({
+      const newMessages = data?.map((item) => ({
         message: item?.text,
         isSentByUser: item?.senderId !== 'AI',
       }));
