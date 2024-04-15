@@ -1,6 +1,7 @@
 export type SendNewMessageBot = {
   userId: string;
   message: string;
+  userName: string;
   chatId?: string;
 };
 

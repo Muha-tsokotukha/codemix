@@ -26,6 +26,7 @@ export function SendInputMessageBar({ promtPlaceholder }: Props) {
         const res = await sendMessageToBot({
           message,
           userId: user?.id,
+          userName: user?.name,
           chatId,
         });
 
