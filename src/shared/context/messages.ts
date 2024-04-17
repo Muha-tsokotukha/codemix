@@ -7,9 +7,16 @@ type Message = {
   isSentByUser?: boolean;
 };
 
+type User = {
+  name: string;
+  id: string;
+};
+
 type ChatHistoryContextType = {
   history: Message[];
   registerMessage: (val: Message) => void;
+  setParticipant: (val?: User) => void;
+  participant?: User;
 };
 
 export const ChatHistoryContext = createContext<

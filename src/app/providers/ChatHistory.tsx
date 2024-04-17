@@ -4,7 +4,7 @@ import React, { useState, ReactNode, useMemo, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 import { ChatHistoryContext } from '@/src/shared';
-import { getChatMessages } from '@/src/entities';
+import { User, getChatMessages } from '@/src/entities';
 
 type Message = {
   message: string;
@@ -20,6 +20,7 @@ export function ChatHistoryProvider({ children }: { children: ReactNode }) {
   );
 
   const [messages, setMessages] = useState<Message[]>([]);
+  const [participant, setParticipant] = useState<User>();
 
   const registerMessage = ({ message, isSentByUser }: Message) => {
     setMessages((prev) => [...prev, { message, isSentByUser }]);
@@ -37,8 +38,8 @@ export function ChatHistoryProvider({ children }: { children: ReactNode }) {
   }, [data, chatId]);
 
   const contextValue = useMemo(
-    () => ({ history: messages, registerMessage }),
-    [messages]
+    () => ({ history: messages, registerMessage, participant, setParticipant }),
+    [messages, participant]
   );
 
   return (
