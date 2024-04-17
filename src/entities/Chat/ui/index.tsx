@@ -6,6 +6,7 @@ type Props = {
   title?: string;
   timestamp?: string;
   name?: string;
+  handleLinkClick: () => void;
 };
 
 export function ChatLink({
@@ -14,9 +15,10 @@ export function ChatLink({
   title,
   timestamp,
   name,
+  handleLinkClick,
 }: Props) {
   return (
-    <Link href={`/${chatId}`}>
+    <Link href={`/${chatId}`} onClick={handleLinkClick}>
       <section className="flex justify-between py-5 pl-6 sm:pl-10  pr-8 h-[92px] border-b border-gray">
         <section>
           <p className="text-primary font-medium text-lg">{name}</p>

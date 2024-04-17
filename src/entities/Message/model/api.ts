@@ -5,7 +5,7 @@ export async function getChatMessages(chatId: string): Promise<MessageItem[]> {
   const url = `/openai/chats/${chatId}`;
 
   const res = await fetcher(url);
-  const data: MessageItem[] = await res.json();
+  const data = await res.json();
 
-  return data;
+  return data?.error ? [] : data;
 }
