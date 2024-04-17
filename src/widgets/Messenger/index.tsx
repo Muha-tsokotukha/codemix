@@ -17,7 +17,7 @@ export function ChatMessenger({ status, promtPlaceholder }: Props) {
 
   return (
     <section className={`${isOpen && 'hidden'} md:block`}>
-      <MessageHeader name={participant?.name || 'AIBOT'} status={status} />
+      <MessageHeader name={participant?.name || 'BOT'} status={status} />
 
       <section className="p-10 bg-brand-gray overflow-auto grid content-start gap-6 h-[calc(100dvh-248px)]">
         {history?.map(({ message, isSentByUser }, index) => {
